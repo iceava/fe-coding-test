@@ -1,0 +1,14 @@
+.header {
+    &-item {
+        list-style-type: none;
+
+        &__link {
+            color: white;
+            text-decoration: none;
+        }
+    }
+}
+
+.active {
+    color: rgb(148, 148, 148);
+}
