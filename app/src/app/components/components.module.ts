@@ -1,3 +1,4 @@
+import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { SharedModule } from './../shared/shared.module';
@@ -8,6 +9,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTableModule } from '@angular/material/table';  
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 
 
@@ -17,6 +19,8 @@ import { MatTableModule } from '@angular/material/table';
   imports: [
     CommonModule,
     SharedModule,
+    MatPaginatorModule,
+    MatButtonModule,
     MatDialogModule,
     FlexLayoutModule,
     MatTableModule,

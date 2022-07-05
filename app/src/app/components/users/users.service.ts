@@ -1,8 +1,9 @@
 import { UsersModel } from '../models/Users.model';
 import { environment } from './../../../environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -10,10 +11,14 @@ import { Observable } from 'rxjs';
 export class UsersService {
 api = environment.SERVER_API_URL;
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private route: ActivatedRoute
     ) { }
 
-    getUsers(): Observable<Array<UsersModel>> {
-      return this.http.get<Array<UsersModel>>(`${this.api}/users`);
+    getUsers(): Observable<HttpResponse<UsersModel[]>> {
+      const page = this.route.snapshot.queryParams.page
+      let params: HttpParams = new HttpParams;
+      params = params.append('page', page.toString())
+      return this.http.get<Array<UsersModel>>(`${this.api}/users`, {observe: 'response', params});
     }
-}
+} 

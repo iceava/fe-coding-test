@@ -9,3 +9,16 @@ button {
         outline: none;
     }
 }
+
+h1 {
+    text-align: center;
+    margin-bottom: 0;
+}
+
+.main {
+    padding: 18px;
+
+    &-title {
+        padding: 19px 3px;
+    }
+}
