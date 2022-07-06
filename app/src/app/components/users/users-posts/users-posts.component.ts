@@ -24,6 +24,8 @@ export class UsersPostsComponent implements OnInit {
   id = this.router.snapshot.queryParams.id
   userPosts!: Array<PostsModel>
   message!: string;
+  comment!: string;
+
   constructor(
     protected router: ActivatedRoute, 
     public detailsService: UserDetailsService, 
@@ -88,7 +90,10 @@ export class UsersPostsComponent implements OnInit {
   
   
     getComments(id: number) {
-      this.detailsService.getPostComments(id).subscribe(res => this.usersComments = res);
+      this.detailsService.getPostComments(id).subscribe(res =>{ 
+        this.usersComments = res
+        res.length === 0 ? this.comment = 'no comment' : this.comment = ''
+      });
     }
   }
 

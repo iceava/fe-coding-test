@@ -42,7 +42,7 @@
                 <a>
                     Comments list
                 </a>
-            <span class="comments" *ngIf="usersComments.length === 0">no comments</span>
+            <span class="comments">{{comment}}</span>
             </h4>
           </div>
          <div> <button mat-raised-button (click)="addComment(post.id)">add comment</button></div>
