@@ -43,8 +43,6 @@ export class UsersComponent implements OnInit {
     .subscribe((res: HttpResponse<UsersModel[]>) =>{ 
       this.dataSource = res.body!
       this.totalSize = Number(res.headers.get('x-pagination-total'))
-      console.log()
-
     })
   }
 
@@ -61,7 +59,6 @@ export class UsersComponent implements OnInit {
   
 
   createUser(data?: UsersModel): void {
-    console.log(data)
       const dialogRef = this.dialog.open(CreateUpdate, 
         {
           width: '250px',

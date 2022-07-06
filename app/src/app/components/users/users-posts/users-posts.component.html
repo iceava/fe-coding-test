@@ -1,0 +1,65 @@
+<div fxLayout="column">
+  <div class="btns" fxLayoutAlign="space-around" fxFlex="100">
+    <h3>User posts list</h3>
+    <span>{{ message }}</span>
+    <button mat-raised-button color="primary" (click)="cancel()">
+      create post
+    </button>
+  </div>
+  <div fxLayoutAlign="center center" fxLayout="column" *ngIf="cancelCreate">
+    <form fxLayoutAlign="center center" [formGroup]="form">
+      <mat-spinner color="primary" *ngIf="loading"></mat-spinner>
+      <mat-form-field class="input" appearance="fill">
+        <mat-label>Title</mat-label>
+        <input matInput formControlName="title" />
+      </mat-form-field>
+      <mat-form-field class="textarea" appearance="fill">
+        <mat-label>Description</mat-label>
+        <textarea matInput formControlName="body"> </textarea>
+      </mat-form-field>
+    </form>
+    <div fxFlex="20" fxLayoutAlign="center" class="btns">
+      <button
+        mat-raised-button
+        (click)="create()"
+        color="primary"
+        class="create"
+        [disabled]="loading"
+      >
+        create
+      </button>
+      <button mat-raised-button (click)="cancel()">cancel</button>
+    </div>
+  </div>
+  <ng-container *ngFor="let post of userPosts">
+    <mat-card>
+      <div>
+        <div fxLayout="row" fxLayoutAlign="space-between">
+          <div>
+            <h3>{{ post.title }}</h3>
+            <p>{{ post.body }}</p>
+            <h4 (click)="getComments(post.id)">
+                <a>
+                    Comments list
+                </a>
+            <span class="comments" *ngIf="usersComments.length === 0">no comments</span>
+            </h4>
+          </div>
+         <div> <button mat-raised-button (click)="addComment(post.id)">add comment</button></div>
+        </div>
+        <div>
+          <ng-container *ngFor="let comment of usersComments">
+            <div *ngIf="post.id === comment.post_id">
+                <h3 class="title-comments">
+                    {{ comment.name }}
+                  </h3>
+                  <span>{{comment.email}}</span>
+                  <p>{{ comment.body }}</p>
+            </div>
+           
+          </ng-container>
+        </div>
+      </div>
+    </mat-card>
+  </ng-container>
+</div>

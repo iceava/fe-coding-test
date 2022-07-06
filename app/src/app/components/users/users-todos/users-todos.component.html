@@ -1,0 +1,47 @@
+<div fxLayoutAlign="space-around">
+  <div>
+    <div fxLayoutAlign="space-between">
+        <h3>Todo list</h3>
+    </div>
+<ng-container *ngFor="let todo of userTodo">
+    <div fxLayout="column">
+        <h3>
+            {{todo.title}}
+        </h3>
+        <span>
+            {{todo.due_on | date: 'dd.MM.yyyy'}}
+        </span>
+        <span>
+            {{todo.status}}
+        </span>
+    </div>
+</ng-container>
+  </div>
+<div *ngIf="todo">
+    <form  fxLayout="column" fxLayoutAlign="center center" [formGroup]="form">
+        <mat-spinner color="primary" *ngIf="loading"></mat-spinner>
+        <mat-form-field class="input" appearance="fill">
+          <mat-label>Title</mat-label>
+          <input matInput formControlName="title" />
+        </mat-form-field>
+        <mat-form-field class="input" appearance="fill">
+            <mat-label>Date</mat-label>
+            <input matInput type="date" formControlName="due_on" />
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Status</mat-label>
+            <mat-select formControlName="status">
+              <mat-option *ngFor="let status of userTodosService.states " [value]="status">
+                {{status}}
+              </mat-option>
+            </mat-select>
+        </mat-form-field>
+      </form>
+      <div fxLayoutAlign="center center" class="btns">
+        <button mat-raised-button (click)="add()">cancel</button>
+        <button class="btns-add" mat-raised-button color="primary" (click)="addTodo()"[disabled]="loading || form.invalid">add to list</button>
+      </div>
+</div>
+<div><button mat-raised-button (click)="add()" color="primary">add todo</button></div>
+
+</div>

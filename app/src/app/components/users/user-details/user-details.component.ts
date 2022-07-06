@@ -3,6 +3,8 @@ import { UsersModel } from '../../../models/Users.model';
 import { UserDetailsService } from './user-details.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { finalize } from 'rxjs/operators'
 
 @Component({
   selector: 'app-user-details',
@@ -11,24 +13,24 @@ import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
 })
 export class UserDetailsComponent implements OnInit {
 
+  cancelCreate = false;
+  usersCommetns: any  = [];
+  form!: FormGroup;
+  loading = false;
   userDetails!: UsersModel;
   id = this.router.snapshot.queryParams.id
   userPosts!: Array<PostsModel>
-  constructor(protected router: ActivatedRoute, public detailsService: UserDetailsService
+  message!: string;
+  constructor(protected router: ActivatedRoute, public detailsService: UserDetailsService, protected fb: FormBuilder
               ) { }
 
   ngOnInit(): void {
     this.getDetails()
-    this.getUserPost()
   }
+
 
   getDetails(): void {
     this.router.data.subscribe((res) => this.userDetails = res.details)
-  }
-
-  getUserPost(): void {
-    console.log('res')
-    this.detailsService.getUserPosts(this.id).subscribe(res => this.userPosts = res)
   }
 
 }

@@ -1,0 +1,20 @@
+<form [formGroup]="form" (submit)="onSubmit()">
+    <mat-spinner  color="primary" *ngIf="loading"></mat-spinner>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Name</mat-label>
+          <input matInput formControlName="name">
+        </mat-form-field>
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Comment</mat-label>
+            <textarea matInput formControlName="body"> </textarea>
+        </mat-form-field>
+</form>
+
+<div fxFlexLayout="row" fxLayoutAlign="space-around">
+    <button mat-raised-button (click)="cancel()">cancel</button>
+    <button mat-raised-button type="submit" color="primary" [disabled]="loading" (click)="onSubmit()">comment</button>    
+</div>

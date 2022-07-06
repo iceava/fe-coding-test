@@ -16,6 +16,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { UsersPostsDialogComponent } from './users-posts-dialog/users-posts-dialog.component';
 
 
 
@@ -23,7 +24,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
-  declarations: [HeaderComponent, FooterComponent, CreateUpdate],
+  declarations: [HeaderComponent, FooterComponent, CreateUpdate, UsersPostsDialogComponent],
   imports: [
     CommonModule,
     MatIconModule,

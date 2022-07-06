@@ -15,6 +15,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import {MatTabsModule} from '@angular/material/tabs';
 import { MatCardModule } from '@angular/material/card'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UsersPostsComponent } from './users/users-posts/users-posts.component';
+import { UsersTodosComponent } from './users/users-todos/users-todos.component';
+import { MatFormFieldModule } from '@angular/material/form-field'; 
+import {MatSelectModule} from '@angular/material/select'; 
 
 
 
@@ -23,7 +28,7 @@ import { MatCardModule } from '@angular/material/card'
 
 
 @NgModule({
-  declarations: [UsersComponent, UserDetailsComponent],
+  declarations: [UsersComponent, UserDetailsComponent, UsersPostsComponent, UsersTodosComponent],
   imports: [
     CommonModule,
     SharedModule,
@@ -39,6 +44,10 @@ import { MatCardModule } from '@angular/material/card'
     RouterModule,
     MatTabsModule,
     MatCardModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatSelectModule
     
   ],
 

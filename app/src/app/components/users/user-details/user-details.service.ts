@@ -26,4 +26,13 @@ export class UserDetailsService {
     return this.http.get<Array<PostsModel>>(`${this.api}users/${id}/posts`)
   }
 
+  createPost(body: PostsModel, id: number): Observable<PostsModel> {
+    return this.http.post<PostsModel>(`${this.api}users/${id}/posts`, body)
+  }
+
+  getPostComments(id: number): Observable<any>{
+    return this.http.get<PostsModel>(`${this.api}posts/${id}/comments`)
+
+  }
+
 }

@@ -1,6 +1,6 @@
 import { UsersModel } from '../../models/Users.model';
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CreateUpdateService } from './create-update.dialog.service';
 import {finalize, delay} from 'rxjs/operators'
@@ -34,10 +34,10 @@ export class CreateUpdate implements OnInit {
 
   initForm(): void {
     this.form = this.fb.group({
-      name: [null, []],
-      email: [null, []],
-      gender: [null, []],
-      status: [null, []]
+      name: [null, [Validators.required]],
+      email: [null, [Validators.required, Validators.email]],
+      gender: [null, [Validators.required]],
+      status: [null, [Validators.required]]
     })
       this.data !== undefined ? this.form.patchValue({
         name: this.data.name,
