@@ -10,6 +10,14 @@ import { CommonModule } from '@angular/common';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTableModule } from '@angular/material/table';  
 import { MatPaginatorModule } from '@angular/material/paginator';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
+import {MatTabsModule} from '@angular/material/tabs';
+import { MatCardModule } from '@angular/material/card'
+
+
+
 
 
 
@@ -25,7 +33,13 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     FlexLayoutModule,
     MatTableModule,
     MatIconModule,
-    MatMenuModule
+    MatMenuModule,
+    MatProgressSpinnerModule,
+    BrowserAnimationsModule,
+    RouterModule,
+    MatTabsModule,
+    MatCardModule,
+    
   ],
 
   providers:[

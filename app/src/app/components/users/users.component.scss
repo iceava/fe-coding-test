@@ -17,8 +17,24 @@ h1 {
 
 .main {
     padding: 18px;
+    height: 80%;
 
     &-title {
         padding: 19px 3px;
     }
 }
+
+
+
+.mat-progress-spinner {
+    position: absolute;
+    top: 50%;
+    left: 40%;
+    bottom: 50%;
+    right: 60%;
+    overflow: visible;
+  }
+
+  table{
+    position: relative;
+  }

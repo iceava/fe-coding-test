@@ -1,11 +1,12 @@
-import { UsersModel } from '../models/Users.model';
+import { UsersModel } from '../../models/Users.model';
 import { UsersService } from './users.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {MatDialog} from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { CreateUpdate } from 'src/app/shared/create-update.dialog/create-update.dialog.component';
 import { HttpResponse } from '@angular/common/http';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { finalize } from 'rxjs/operators'
 
 @Component({
   selector: 'app-users',
@@ -14,6 +15,7 @@ import { Router } from '@angular/router';
 })
 export class UsersComponent implements OnInit {
 
+  loading = false;
   displayedColumns: string[] = ['id','name', 'email', 'gender', 'status', 'actions'];
   public pageSize = 20;
   public totalSize = 0;
@@ -27,7 +29,8 @@ export class UsersComponent implements OnInit {
 
   constructor(private usersService: UsersService,
               private dialog: MatDialog,
-              private route: Router
+              private route: Router,
+              private router: ActivatedRoute
     ) { }
 
   ngOnInit(): void {
@@ -35,7 +38,9 @@ export class UsersComponent implements OnInit {
   }
 
   getUsers(): void {
-    this.usersService.getUsers().subscribe((res: HttpResponse<UsersModel[]>) =>{ 
+    this.loading = true;
+    this.usersService.getUsers().pipe(finalize(() => this.loading = false))
+    .subscribe((res: HttpResponse<UsersModel[]>) =>{ 
       this.dataSource = res.body!
       this.totalSize = Number(res.headers.get('x-pagination-total'))
       console.log()
@@ -55,11 +60,34 @@ export class UsersComponent implements OnInit {
   }
   
 
-  createUser(): void {
+  createUser(data?: UsersModel): void {
+    console.log(data)
       const dialogRef = this.dialog.open(CreateUpdate, 
         {
-          width: '250px'
+          width: '250px',
+          data
         })
+        dialogRef.afterClosed().subscribe(res => {
+          if(res === 'result') {
+            this.handlePage(this.pageEvent)
+          }
+      })
+
+  }
+
+
+  delete(id: number): void {
+    this.loading = true
+    this.usersService.delete(id).pipe(finalize(() => this.loading = false))
+    .subscribe(() => this.handlePage(this.pageEvent))
+  }
+
+
+  userDetails(id: number):void {
+    this.route.navigate(['/users/details'], { 
+      queryParams: {
+      id
+    }})
   }
 
 }

@@ -1,3 +1,5 @@
+import { UserDetailsService } from './components/users/user-details/user-details.service';
+import { UserDetailsComponent } from './components/users/user-details/user-details.component';
 import { HomeComponent } from './home/home.component';
 import { UsersComponent } from './components/users/users.component';
 import { NgModule, Component } from '@angular/core';
@@ -10,8 +12,14 @@ const routes: Routes = [
   {
     path: 'home', component: HomeComponent
   },  
+
   { 
-    path: "users", component: UsersComponent
+    path: "users", component: UsersComponent,
+  },
+  {
+    path: 'users/details', component: UserDetailsComponent, resolve :{
+      details: UserDetailsService
+    }
   }
 ];
 

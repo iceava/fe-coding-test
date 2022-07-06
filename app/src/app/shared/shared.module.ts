@@ -1,3 +1,4 @@
+import { AppRoutingModule } from './../app-routing.module';
 import { RouterModule } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FooterComponent } from './footer/footer.component';
@@ -9,6 +10,12 @@ import { MatButtonModule } from '@angular/material/button'
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { HttpClientModule } from '@angular/common/http';
 import { CreateUpdate } from './create-update.dialog/create-update.dialog.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -20,14 +27,22 @@ import { CreateUpdate } from './create-update.dialog/create-update.dialog.compon
   imports: [
     CommonModule,
     MatIconModule,
+    AppRoutingModule,
     HttpClientModule,
     RouterModule,
     MatButtonModule,
     MatToolbarModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatProgressSpinnerModule,
+    BrowserAnimationsModule
   ],
   exports: [
-    HeaderComponent, FooterComponent
+    HeaderComponent, FooterComponent, MatInputModule
   ]
 })
 export class SharedModule { }

@@ -1,9 +1,10 @@
-import { UsersModel } from '../models/Users.model';
+import { UsersModel } from '../../models/Users.model';
 import { environment } from './../../../environments/environment';
 import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+
 
 @Injectable({
   providedIn: 'root'
@@ -20,5 +21,9 @@ api = environment.SERVER_API_URL;
       let params: HttpParams = new HttpParams;
       params = params.append('page', page.toString())
       return this.http.get<Array<UsersModel>>(`${this.api}/users`, {observe: 'response', params});
+    }
+
+    delete(id: number): Observable<UsersModel> {
+     return this.http.delete<UsersModel>(`${this.api}/users/${id}`)
     }
 } 

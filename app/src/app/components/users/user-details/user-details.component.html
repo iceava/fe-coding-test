@@ -1,1 +1,33 @@
-<p>user-details works!</p>
+<mat-tab-group fxFlex="100" fxLayout="column" fxLayoutAlign="center center" animationDuration="0ms">
+    <mat-tab fxFlex="100" label="User details" fxFlex="100" fxLayout="column"> 
+        <div fxLayout="column" >
+            <span><strong>Name:</strong>{{userDetails.name}}</span>
+            <span><strong>Email:</strong>{{userDetails.email}}</span>
+            <span><strong>Gender:</strong>{{userDetails.gender}}</span>
+            <span><strong>Sratus:</strong>{{userDetails.status}}</span>
+        </div>
+    </mat-tab>
+    <mat-tab fxFlex="100" label="User posts">
+       <div fxLayoutAlign="space-around"><h3>User posts list</h3> <button mat-raised-button color="primary">create post</button> </div>
+      <div fxLayoutAlign="center center">
+        <form fxLayoutAlign="center center">
+            <mat-spinner  color="primary" *ngIf="false"></mat-spinner>
+                <mat-form-field class="example-full-width" appearance="fill">
+                  <mat-label>Name</mat-label>
+                  <input matInput formControlName="name">
+                </mat-form-field>
+                <mat-form-field class="textarea" appearance="fill">
+                    <mat-label>Email</mat-label>
+                    <textarea matInput formControlName="email"> </textarea>
+                </mat-form-field>
+               </form>   
+      </div> 
+       <ng-container *ngFor="let post of userPosts">
+            <mat-card>
+                <h3>{{post.title}}</h3>
+                <p>{{post.body}}</p>
+            </mat-card>
+        </ng-container>
+    </mat-tab>
+    <mat-tab fxFlex="100" label="Third"> Content 3 </mat-tab>
+  </mat-tab-group>
