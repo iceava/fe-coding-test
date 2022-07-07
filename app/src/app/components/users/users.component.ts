@@ -1,19 +1,20 @@
 import { UsersModel } from '../../models/Users.model';
 import { UsersService } from './users.service';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { CreateUpdate } from 'src/app/shared/create-update.dialog/create-update.dialog.component';
 import { HttpResponse } from '@angular/common/http';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { ActivatedRoute, Router } from '@angular/router';
-import { finalize } from 'rxjs/operators'
+import { finalize, take, takeUntil } from 'rxjs/operators'
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss']
 })
-export class UsersComponent implements OnInit {
+export class UsersComponent implements OnInit, OnDestroy {
 
   loading = false;
   displayedColumns: string[] = ['id','name', 'email', 'gender', 'status', 'actions'];
@@ -24,6 +25,9 @@ export class UsersComponent implements OnInit {
   }
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  subject$ = new Subject()
+
   dataSource!: Array<UsersModel> 
  
 
@@ -32,6 +36,10 @@ export class UsersComponent implements OnInit {
               private route: Router,
               private router: ActivatedRoute
     ) { }
+  ngOnDestroy(): void {
+    this.subject$.next()
+    this.subject$.complete()
+  }
 
   ngOnInit(): void {
     this.handlePage(this.pageEvent)
@@ -39,7 +47,7 @@ export class UsersComponent implements OnInit {
 
   getUsers(): void {
     this.loading = true;
-    this.usersService.getUsers().pipe(finalize(() => this.loading = false))
+    this.usersService.getUsers().pipe(finalize(() => this.loading = false), takeUntil(this.subject$))
     .subscribe((res: HttpResponse<UsersModel[]>) =>{ 
       this.dataSource = res.body!
       this.totalSize = Number(res.headers.get('x-pagination-total'))
@@ -64,7 +72,7 @@ export class UsersComponent implements OnInit {
           width: '250px',
           data
         })
-        dialogRef.afterClosed().subscribe(res => {
+        dialogRef.afterClosed().pipe(takeUntil(this.subject$)).subscribe(res => {
           if(res === 'result') {
             this.handlePage(this.pageEvent)
           }
@@ -75,7 +83,7 @@ export class UsersComponent implements OnInit {
 
   delete(id: number): void {
     this.loading = true
-    this.usersService.delete(id).pipe(finalize(() => this.loading = false))
+    this.usersService.delete(id).pipe(finalize(() => this.loading = false), takeUntil(this.subject$))
     .subscribe(() => this.handlePage(this.pageEvent))
   }
 

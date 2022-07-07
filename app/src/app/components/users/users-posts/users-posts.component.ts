@@ -1,22 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { PostsModel } from 'src/app/models/Posts.model';
 import { UsersModel } from 'src/app/models/Users.model';
 import { UserDetailsService } from '../user-details/user-details.service';
-import { finalize } from 'rxjs/operators'
+import { finalize, takeUntil } from 'rxjs/operators'
 import { MatDialog } from '@angular/material/dialog';
 import { UsersPostsDialogComponent } from 'src/app/shared/users-posts-dialog/users-posts-dialog.component';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-users-posts',
   templateUrl: './users-posts.component.html',
   styleUrls: ['./users-posts.component.scss']
 })
-export class UsersPostsComponent implements OnInit {
+export class UsersPostsComponent implements OnInit, OnDestroy {
 
   cancelCreate = false;
   usersComments: any  = [];
+  subject$ = new Subject()
   showing  = false;
   form!: FormGroup;
   loading = false;
@@ -26,12 +28,17 @@ export class UsersPostsComponent implements OnInit {
   message!: string;
   comment!: string;
 
+
   constructor(
-    protected router: ActivatedRoute, 
-    public detailsService: UserDetailsService, 
+    protected router: ActivatedRoute,
+    public detailsService: UserDetailsService,
     protected fb: FormBuilder,
     private dialog: MatDialog,
               ) { }
+  ngOnDestroy(): void {
+    this.subject$.next()
+    this.subject$.complete()
+  }
 
   ngOnInit(): void {
     this.getDetails()
@@ -46,22 +53,22 @@ export class UsersPostsComponent implements OnInit {
         body: [null, []]
       })
     }
-  
+
     getDetails(): void {
       this.router.data.subscribe((res) => this.userDetails = res.details)
     }
-  
+
     getUserPost(): void {
-      this.detailsService.getUserPosts(this.id).subscribe(res => this.userPosts = res)
+      this.detailsService.getUserPosts(this.id).pipe(takeUntil(this.subject$)).subscribe(res => this.userPosts = res)
     }
-  
+
     cancel(): void {
       this.cancelCreate = !this.cancelCreate
     }
-  
+
     create(): void {
         this.loading = true;
-        this.detailsService.createPost(this.form.value, this.id).pipe(finalize(() => this.loading = false)).subscribe(() => {
+        this.detailsService.createPost(this.form.value, this.id).pipe(finalize(() => this.loading = false), takeUntil(this.subject$)).subscribe(() => {
           this.getUserPost()
           this.cancel()
           this.form.reset()
@@ -75,7 +82,7 @@ export class UsersPostsComponent implements OnInit {
       const data = {
         id
       }
-        const dialogRef = this.dialog.open( UsersPostsDialogComponent, 
+        const dialogRef = this.dialog.open( UsersPostsDialogComponent,
           {
             width: '250px',
             data
@@ -85,16 +92,14 @@ export class UsersPostsComponent implements OnInit {
               this.getComments(data.id)
             }
         })
-  
+
     }
-  
-  
+
+
     getComments(id: number) {
-      this.detailsService.getPostComments(id).subscribe(res =>{ 
+      this.detailsService.getPostComments(id).pipe(takeUntil(this.subject$)).subscribe(res =>{
         this.usersComments = res
         res.length === 0 ? this.comment = 'no comment' : this.comment = ''
       });
     }
   }
-
-
