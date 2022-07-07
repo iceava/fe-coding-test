@@ -13,7 +13,7 @@
       </ng-container> 
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef> Name </th>
-      <td mat-cell *matCellDef="let element" (click)="userDetails(element.id)"> {{element.name}} </td>
+      <td  matTooltip="click for user udetails"  class="details-name" mat-cell *matCellDef="let element" (click)="userDetails(element.id)"> {{element.name}} </td>
     </ng-container>
   
     <!-- Name Column -->
