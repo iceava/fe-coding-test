@@ -22,7 +22,7 @@ export class UsersTodosComponent implements OnInit, OnDestroy {
                 protected fb: FormBuilder
     ) { }
   ngOnDestroy(): void {
-    this.subject$.next()
+    this.subject$.next(true)
     this.subject$.complete()
   }
 
@@ -38,7 +38,7 @@ export class UsersTodosComponent implements OnInit, OnDestroy {
       status : [null, [Validators.required]]
     })
   }
-  
+
   getUserTodos(): void {
       this.userTodosService.getUserTodos().pipe(takeUntil(this.subject$)).subscribe(res => this.userTodo = res)
   }

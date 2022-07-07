@@ -17,7 +17,7 @@ api = environment.SERVER_API_URL;
     ) { }
 
     getUsers(): Observable<HttpResponse<UsersModel[]>> {
-      const page = this.route.snapshot.queryParams.page
+      const page = this.route.snapshot.queryParams['page']
       let params: HttpParams = new HttpParams;
       params = params.append('page', page.toString())
       return this.http.get<Array<UsersModel>>(`${this.api}/users`, {observe: 'response', params});
@@ -26,4 +26,4 @@ api = environment.SERVER_API_URL;
     delete(id: number): Observable<UsersModel> {
      return this.http.delete<UsersModel>(`${this.api}/users/${id}`)
     }
-} 
+}

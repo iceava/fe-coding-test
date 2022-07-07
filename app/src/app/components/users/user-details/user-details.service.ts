@@ -12,14 +12,14 @@ import { ActivatedRoute, ActivatedRouteSnapshot, RouterStateSnapshot } from '@an
 export class UserDetailsService {
 
   api = environment.SERVER_API_URL
-  id = this.router.snapshot.queryParams.id;
+  id = this.router.snapshot.queryParams['id'];
 
   constructor(protected http: HttpClient,
               protected router: ActivatedRoute) { }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<UsersModel> {
-    const id = route.queryParams.id
-    return this.http.get<UsersModel>(`${this.api}users/${id}`) 
+    const id = route.queryParams['id']
+    return this.http.get<UsersModel>(`${this.api}users/${id}`)
   }
 
   getUserPosts(id: number): Observable<Array<PostsModel>> {

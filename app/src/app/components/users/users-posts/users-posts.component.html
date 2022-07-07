@@ -1,5 +1,5 @@
 <div fxLayout="column">
-  <div class="btns" fxLayoutAlign="space-around" fxFlex="100">
+  <div class="btns" fxLayoutAlign="space-around" >
     <h3>User posts list</h3>
     <span>{{ message }}</span>
     <button mat-raised-button color="primary" (click)="cancel()">
@@ -42,7 +42,7 @@
                 <a>
                     Comments list
                 </a>
-            <span class="comments">{{comment}}</span>
+            <span class="comments" *ngIf="usersComments.length === 0">no comments</span>
             </h4>
           </div>
          <div> <button mat-raised-button (click)="addComment(post.id)">add comment</button></div>
@@ -56,7 +56,7 @@
                   <span>{{comment.email}}</span>
                   <p>{{ comment.body }}</p>
             </div>
-           
+
           </ng-container>
         </div>
       </div>

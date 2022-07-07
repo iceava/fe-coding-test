@@ -14,18 +14,18 @@ import { Subject } from 'rxjs';
 export class CreateUpdate implements OnInit, OnDestroy {
 
   form!: FormGroup;
-  
+
   loading = false;
 
   subject$ = new Subject()
-  
+
   constructor(public fb: FormBuilder,
               public dialogRef: MatDialogRef<CreateUpdate>,
               public createUpdateService: CreateUpdateService,
-              @Inject(MAT_DIALOG_DATA) public data: UsersModel 
+              @Inject(MAT_DIALOG_DATA) public data: UsersModel
     ) { }
   ngOnDestroy(): void {
-    this.subject$.next()
+    this.subject$.next(true)
     this.subject$.complete()
   }
 

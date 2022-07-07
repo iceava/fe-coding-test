@@ -17,7 +17,7 @@ export class UsersPostsDialogComponent implements OnInit, OnDestroy {
   form!: FormGroup;
 
   loading = false;
-  
+
   subject$ = new Subject()
 
   constructor(public fb: FormBuilder,
@@ -25,10 +25,10 @@ export class UsersPostsDialogComponent implements OnInit, OnDestroy {
     public createCommetService: UsersPostsDialogService,
     @Inject(MAT_DIALOG_DATA) public  data: {
       id: number
-    } 
+    }
 ) { }
   ngOnDestroy(): void {
-    this.subject$.next()
+    this.subject$.next(true)
     this.subject$.complete()
   }
 

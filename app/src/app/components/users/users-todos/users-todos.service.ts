@@ -15,12 +15,12 @@ export class UsersTodosService {
   ]
 
   api = environment.SERVER_API_URL;
-  id = this.activatedRoute.snapshot.queryParams.id;
+  id = this.activatedRoute.snapshot.queryParams['id'];
 
   constructor(protected http: HttpClient, protected activatedRoute: ActivatedRoute) { }
 
 
- 
+
  getUserTodos(): Observable<Array<UserTodosModel>> {
     return this.http.get<Array<UserTodosModel>>(`${this.api}users/${this.id}/todos`)
   }

@@ -28,8 +28,8 @@ export class UsersComponent implements OnInit, OnDestroy {
 
   subject$ = new Subject()
 
-  dataSource!: Array<UsersModel> 
- 
+  dataSource!: Array<UsersModel>
+
 
   constructor(private usersService: UsersService,
               private dialog: MatDialog,
@@ -37,7 +37,7 @@ export class UsersComponent implements OnInit, OnDestroy {
               private router: ActivatedRoute
     ) { }
   ngOnDestroy(): void {
-    this.subject$.next()
+    this.subject$.next(true)
     this.subject$.complete()
   }
 
@@ -48,7 +48,7 @@ export class UsersComponent implements OnInit, OnDestroy {
   getUsers(): void {
     this.loading = true;
     this.usersService.getUsers().pipe(finalize(() => this.loading = false), takeUntil(this.subject$))
-    .subscribe((res: HttpResponse<UsersModel[]>) =>{ 
+    .subscribe((res: HttpResponse<UsersModel[]>) =>{
       this.dataSource = res.body!
       this.totalSize = Number(res.headers.get('x-pagination-total'))
     })
@@ -64,10 +64,10 @@ export class UsersComponent implements OnInit, OnDestroy {
     })
     setTimeout(() => this.getUsers())
   }
-  
+
 
   createUser(data?: UsersModel): void {
-      const dialogRef = this.dialog.open(CreateUpdate, 
+      const dialogRef = this.dialog.open(CreateUpdate,
         {
           width: '250px',
           data
@@ -89,7 +89,7 @@ export class UsersComponent implements OnInit, OnDestroy {
 
 
   userDetails(id: number):void {
-    this.route.navigate(['/users/details'], { 
+    this.route.navigate(['/users/details'], {
       queryParams: {
       id
     }})

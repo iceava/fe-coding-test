@@ -10,26 +10,26 @@
     <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef> No </th>
         <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-      </ng-container> 
+      </ng-container>
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef> Name </th>
-      <td  matTooltip="click for user udetails"  class="details-name" mat-cell *matCellDef="let element" (click)="userDetails(element.id)"> {{element.name}}
-      <button  #tooltip="matTooltip"  matTooltip="click for user udetails"></button>  
+      <td   matTooltip="click for user details"  class="details-name" mat-cell *matCellDef="let element" (click)="userDetails(element.id)"> {{element.name}}
+
       </td>
     </ng-container>
-  
+
     <!-- Name Column -->
     <ng-container matColumnDef="email">
       <th mat-header-cell *matHeaderCellDef> Email </th>
       <td mat-cell *matCellDef="let element"> {{element.email}} </td>
     </ng-container>
-    
+
     <!-- Weight Column -->
     <ng-container matColumnDef="gender">
       <th mat-header-cell *matHeaderCellDef> Gender </th>
       <td mat-cell *matCellDef="let element"> {{element.gender}} </td>
     </ng-container>
-  
+
     <!-- Symbol Column -->
     <ng-container matColumnDef="status">
       <th mat-header-cell *matHeaderCellDef> Status </th>
@@ -52,11 +52,11 @@
                   <mat-icon>delete_outline</mat-icon>
                   <span>delete</span>
                 </button>
-        
+
               </mat-menu>
         </td>
       </ng-container>
-  
+
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>

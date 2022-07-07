@@ -3,21 +3,21 @@
         <mat-form-field class="example-full-width" appearance="fill">
           <mat-label>Name</mat-label>
           <input matInput formControlName="name">
-          <div *ngIf="form.get('name')!.invalid && (form.get('name')!.dirty || form.get('name')!.touched)">
-            <small  *ngIf="form.get('name')?.errors?.required">
-              This field is required.
-            </small>
-          </div>
+<!--          <div *ngIf="form.get('name')!.invalid && (form.get('name')!.dirty || form.get('name')!.touched)">-->
+<!--            <small  *ngIf="form.get('name')?.errors?.required">-->
+<!--              This field is required.-->
+<!--            </small>-->
+<!--          </div>-->
         </mat-form-field>
-       
+
         <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Email</mat-label>
             <input matInput formControlName="email">
-            <div *ngIf="form.get('email')!.invalid && (form.get('email')!.dirty || form.get('email')!.touched)">
-              <small  *ngIf="form.get('email')?.errors?.required">
-                This field is required.
-              </small>
-            </div>
+<!--            <div *ngIf="form.get('email')!.invalid && (form.get('email')!.dirty || form.get('email')!.touched)">-->
+<!--              <small  *ngIf="form.get('email')?.errors?.required">-->
+<!--                This field is required.-->
+<!--              </small>-->
+<!--            </div>-->
         </mat-form-field>
         <mat-form-field appearance="fill">
             <mat-label>Gender</mat-label>
@@ -26,13 +26,13 @@
                 {{gender}}
               </mat-option>
             </mat-select>
-            <div *ngIf="form.get('gender')!.invalid && (form.get('gender')!.dirty || form.get('gender')!.touched)">
-              <small  *ngIf="form.get('gender')?.errors?.required">
-                This field is required.
-              </small>
-            </div>
+<!--            <div *ngIf="form.get('gender')!.invalid && (form.get('gender')!.dirty || form.get('gender')!.touched)">-->
+<!--              <small  *ngIf="form.get('gender')?.errors?.required">-->
+<!--                This field is required.-->
+<!--              </small>-->
+<!--            </div>-->
         </mat-form-field>
-           
+
         <mat-form-field appearance="fill">
             <mat-label>Status</mat-label>
             <mat-select formControlName="status">
@@ -40,15 +40,15 @@
                 {{status}}
               </mat-option>
             </mat-select>
-            <div *ngIf="form.get('status')!.invalid && (form.get('status')!.dirty || form.get('status')!.touched)">
-              <small  *ngIf="form.get('status')?.errors?.required">
-                This field is required.
-              </small>
-            </div>
+<!--            <div *ngIf="form.get('status')!.invalid && (form.get('status')!.dirty || form.get('status')!.touched)">-->
+<!--              <small  *ngIf="form.get('status')?.errors?.required">-->
+<!--                This field is required.-->
+<!--              </small>-->
+<!--            </div>-->
         </mat-form-field>
 </form>
 
 <div fxFlexLayout="row" fxLayoutAlign="space-around">
     <button mat-raised-button (click)="cancel()">cancel</button>
-    <button mat-raised-button type="submit" color="primary" [disabled]="loading || form.invalid" (click)="onSubmit()">update user</button>    
+    <button mat-raised-button type="submit" color="primary" [disabled]="loading || form.invalid" (click)="onSubmit()">update user</button>
 </div>

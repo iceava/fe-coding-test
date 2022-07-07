@@ -23,7 +23,7 @@ export class UsersPostsComponent implements OnInit, OnDestroy {
   form!: FormGroup;
   loading = false;
   userDetails!: UsersModel;
-  id = this.router.snapshot.queryParams.id
+  id = this.router.snapshot.queryParams['id']
   userPosts!: Array<PostsModel>
   message!: string;
   comment!: string;
@@ -36,7 +36,7 @@ export class UsersPostsComponent implements OnInit, OnDestroy {
     private dialog: MatDialog,
               ) { }
   ngOnDestroy(): void {
-    this.subject$.next()
+    this.subject$.next(true)
     this.subject$.complete()
   }
 
@@ -55,6 +55,7 @@ export class UsersPostsComponent implements OnInit, OnDestroy {
     }
 
     getDetails(): void {
+      // @ts-ignore
       this.router.data.subscribe((res) => this.userDetails = res.details)
     }
 
@@ -103,3 +104,8 @@ export class UsersPostsComponent implements OnInit, OnDestroy {
       });
     }
   }
+
+
+
+
+

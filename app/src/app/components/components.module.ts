@@ -8,7 +8,7 @@ import { UsersComponent } from './users/users.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatMenuModule } from '@angular/material/menu';
-import { MatTableModule } from '@angular/material/table';  
+import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -18,10 +18,9 @@ import { MatCardModule } from '@angular/material/card'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UsersPostsComponent } from './users/users-posts/users-posts.component';
 import { UsersTodosComponent } from './users/users-todos/users-todos.component';
-import { MatFormFieldModule } from '@angular/material/form-field'; 
-import {MatSelectModule} from '@angular/material/select'; 
-import { MatTooltipModule } from '@angular/material/tooltip';
-
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 
 
@@ -31,30 +30,31 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [UsersComponent, UserDetailsComponent, UsersPostsComponent, UsersTodosComponent],
-  imports: [
-    CommonModule,
-    SharedModule,
-    MatPaginatorModule,
-    MatButtonModule,
-    MatDialogModule,
-    FlexLayoutModule,
-    MatTableModule,
-    MatIconModule,
-    MatMenuModule,
-    MatProgressSpinnerModule,
-    BrowserAnimationsModule,
-    RouterModule,
-    MatTabsModule,
-    MatCardModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatTooltipModule
-  ],
+    imports: [
+        CommonModule,
+        SharedModule,
+        MatPaginatorModule,
+        MatButtonModule,
+        MatDialogModule,
+        FlexLayoutModule,
+        MatTableModule,
+        MatIconModule,
+        MatMenuModule,
+        MatProgressSpinnerModule,
+        BrowserAnimationsModule,
+        RouterModule,
+        MatTabsModule,
+        MatCardModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatTooltipModule
+
+    ],
 
   providers:[
-   
+
   ],
 
   exports: [

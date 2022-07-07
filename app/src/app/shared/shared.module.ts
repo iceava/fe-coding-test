@@ -1,4 +1,4 @@
-import { AppRoutingModule } from './../app-routing.module';
+import { AppRoutingModule } from '../app-routing.module';
 import { RouterModule } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FooterComponent } from './footer/footer.component';
