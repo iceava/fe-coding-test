@@ -20,6 +20,8 @@ import { UsersPostsComponent } from './users/users-posts/users-posts.component';
 import { UsersTodosComponent } from './users/users-todos/users-todos.component';
 import { MatFormFieldModule } from '@angular/material/form-field'; 
 import {MatSelectModule} from '@angular/material/select'; 
+import { MatTooltipModule } from '@angular/material/tooltip';
+
 
 
 
@@ -47,8 +49,8 @@ import {MatSelectModule} from '@angular/material/select';
     FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule,
-    MatSelectModule
-    
+    MatSelectModule,
+    MatTooltipModule
   ],
 
   providers:[
