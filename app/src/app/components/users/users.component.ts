@@ -69,7 +69,7 @@ export class UsersComponent implements OnInit, OnDestroy {
   createUser(data?: UsersModel): void {
       const dialogRef = this.dialog.open(CreateUpdate,
         {
-          width: '250px',
+          width: '330px',
           data
         })
         dialogRef.afterClosed().pipe(takeUntil(this.subject$)).subscribe(res => {

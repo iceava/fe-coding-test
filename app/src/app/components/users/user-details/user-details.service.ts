@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ActivatedRoute, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import {CommentModel} from "../../../models/Comment.model";
 
 @Injectable({
   providedIn: 'root'
@@ -30,8 +31,8 @@ export class UserDetailsService {
     return this.http.post<PostsModel>(`${this.api}users/${id}/posts`, body)
   }
 
-  getPostComments(id: number): Observable<any>{
-    return this.http.get<PostsModel>(`${this.api}posts/${id}/comments`)
+  getPostComments(id: number): Observable<Array<CommentModel>>{
+    return this.http.get<Array<CommentModel>>(`${this.api}posts/${id}/comments`)
 
   }
 

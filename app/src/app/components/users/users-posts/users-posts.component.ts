@@ -8,6 +8,7 @@ import { finalize, takeUntil } from 'rxjs/operators'
 import { MatDialog } from '@angular/material/dialog';
 import { UsersPostsDialogComponent } from 'src/app/shared/users-posts-dialog/users-posts-dialog.component';
 import { Subject } from 'rxjs';
+import {CommentModel} from "../../../models/Comment.model";
 
 @Component({
   selector: 'app-users-posts',
@@ -17,16 +18,16 @@ import { Subject } from 'rxjs';
 export class UsersPostsComponent implements OnInit, OnDestroy {
 
   cancelCreate = false;
-  usersComments: any  = [];
+  usersComments!: Array<CommentModel>;
   subject$ = new Subject()
-  showing  = false;
   form!: FormGroup;
   loading = false;
   userDetails!: UsersModel;
   id = this.router.snapshot.queryParams['id']
   userPosts!: Array<PostsModel>
   message!: string;
-  comment!: string;
+
+
 
 
   constructor(
@@ -55,8 +56,7 @@ export class UsersPostsComponent implements OnInit, OnDestroy {
     }
 
     getDetails(): void {
-      // @ts-ignore
-      this.router.data.subscribe((res) => this.userDetails = res.details)
+      this.router.data.subscribe((res) => this.userDetails = res['details'])
     }
 
     getUserPost(): void {
@@ -98,9 +98,8 @@ export class UsersPostsComponent implements OnInit, OnDestroy {
 
 
     getComments(id: number) {
-      this.detailsService.getPostComments(id).pipe(takeUntil(this.subject$)).subscribe(res =>{
+      this.detailsService.getPostComments(id).pipe(takeUntil(this.subject$)).subscribe(res => {
         this.usersComments = res
-        res.length === 0 ? this.comment = 'no comment' : this.comment = ''
       });
     }
   }

@@ -42,13 +42,12 @@
                 <a>
                     Comments list
                 </a>
-            <span class="comments" *ngIf="usersComments.length === 0">no comments</span>
             </h4>
           </div>
          <div> <button mat-raised-button (click)="addComment(post.id)">add comment</button></div>
         </div>
         <div>
-          <ng-container *ngFor="let comment of usersComments">
+          <ng-container *ngFor="let comment of usersComments;"`>
             <div *ngIf="post.id === comment.post_id">
                 <h3 class="title-comments">
                     {{ comment.name }}
